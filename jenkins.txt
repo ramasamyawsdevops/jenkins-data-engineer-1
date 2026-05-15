@@ -1,0 +1,117 @@
+pipeline {
+
+    agent any
+
+    stages {
+          stage('Clean Workspace') {
+            steps {
+
+                deleteDir()
+
+            }
+        }
+
+        stage('GitClone') {
+            steps {
+
+             sh 'git clone https://github.com/ramasamyawsdevops/-jenkins-data-engineer-1.git'
+
+            }
+        }
+
+        stage('Check Files') {
+            steps {
+
+                dir('jenkins-data-engineer') {
+
+                    sh 'pwd'
+                    sh 'ls -lrth'
+
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+
+                dir('jenkins-data-engineer') {
+
+                    sh 'pip3 install -r requirements.txt'
+
+                }
+            }
+        }
+
+        stage('Run ETL') {
+            steps {
+
+                dir('jenkins-data-engineer') {
+
+                    // sh 'python3 etl.py'
+                    sh 'python3 sales_data_etl.py'
+
+                }
+            }
+        }
+        
+        stage('Git Add') {
+            steps {
+                dir('jenkins-data-engineer') {
+
+                sh 'git add .'
+
+            }
+        }
+        }
+
+        stage('Git Commit') {
+            steps {
+                dir('jenkins-data-engineer') {
+
+                sh 'git config --global user.email "ramasamyawsdevops@gmail.com"'
+                sh 'git config --global user.name "ramasamyawsdevops"'
+
+                sh 'git commit -m "Updated ETL output files" || true'
+
+            }
+        }
+        }
+
+        stage('Git Push') {
+            steps {
+                
+                dir('jenkins-data-engineer'){
+
+                withCredentials([usernamePassword(
+                    credentialsId: 'github-creds',
+                    usernameVariable: 'GIT_USERNAME',
+                    passwordVariable: 'GIT_PASSWORD'
+                )]) {
+
+                    sh '''
+                    git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ramasamyawsdevops/jenkins-data-engineer.git
+                    git push origin main
+                    '''
+
+                }
+              }
+            }
+        }
+    }
+    
+
+    post {
+
+        success {
+            echo 'Pipeline Successful'
+        }
+
+        failure {
+            echo 'Pipeline Failed'
+        }
+
+        always {
+            echo 'Pipeline Finished'
+        }
+    }
+}
