@@ -1,0 +1,16 @@
+order_id,customer_name,city,product,category,qty,price,order_date,total_amount
+1001,Ramesh,Chennai,Laptop,Electronics,2,50000,2025-01-10,100000
+1002,Priya,Bangalore,Mouse,Accessories,5,500,2025-01-11,2500
+1003,Arun,Hyderabad,Keyboard,Accessories,3,1500,2025-01-12,4500
+1004,Divya,Mumbai,Monitor,Electronics,2,12000,2025-01-13,24000
+1005,Kumar,Delhi,Printer,Electronics,1,15000,2025-01-14,15000
+1006,Sneha,Chennai,Tablet,Electronics,2,28000,2025-01-15,56000
+1007,Vijay,Bangalore,Speaker,Accessories,4,2200,2025-01-16,8800
+1008,Meena,Hyderabad,SSD,Storage,3,7000,2025-01-17,21000
+1009,Raj,Mumbai,RAM,Components,5,4500,2025-01-18,22500
+1010,Anu,Delhi,Projector,Electronics,1,40000,2025-01-19,40000
+1011,John,Chennai,USB Drive,Storage,10,800,2025-02-01,8000
+1012,David,Bangalore,Router,Networking,2,3500,2025-02-03,7000
+1013,Sara,Hyderabad,Headphones,Accessories,6,3000,2025-02-05,18000
+1014,Kiran,Mumbai,Microphone,Accessories,2,6500,2025-02-07,13000
+1015,Pooja,Delhi,Smart Watch,Wearables,4,9000,2025-02-09,36000
